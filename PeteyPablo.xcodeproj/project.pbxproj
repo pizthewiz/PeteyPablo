@@ -1,0 +1,296 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D828E87013FD854A008A9850 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D828E86F13FD854A008A9850 /* Quartz.framework */; };
+		D828E87C13FD854A008A9850 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D828E87A13FD854A008A9850 /* InfoPlist.strings */; };
+		D828E87F13FD854A008A9850 /* PeteyPabloPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = D828E87E13FD854A008A9850 /* PeteyPabloPlugin.m */; };
+		D828E88613FD85F0008A9850 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D828E87413FD854A008A9850 /* Foundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		D828E86A13FD8549008A9850 /* PeteyPablo.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeteyPablo.plugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		D828E86F13FD854A008A9850 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		D828E87213FD854A008A9850 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		D828E87313FD854A008A9850 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		D828E87413FD854A008A9850 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D828E87913FD854A008A9850 /* PeteyPablo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PeteyPablo-Info.plist"; sourceTree = "<group>"; };
+		D828E87B13FD854A008A9850 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D828E87D13FD854A008A9850 /* PeteyPabloPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeteyPabloPlugin.h; sourceTree = "<group>"; };
+		D828E87E13FD854A008A9850 /* PeteyPabloPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PeteyPabloPlugin.m; sourceTree = "<group>"; };
+		D828E88013FD854A008A9850 /* PeteyPablo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PeteyPablo-Prefix.pch"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D828E86613FD8549008A9850 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D828E87013FD854A008A9850 /* Quartz.framework in Frameworks */,
+				D828E88613FD85F0008A9850 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D828E85E13FD8549008A9850 = {
+			isa = PBXGroup;
+			children = (
+				D828E87713FD854A008A9850 /* PeteyPablo */,
+				D828E86C13FD8549008A9850 /* Frameworks */,
+				D828E86B13FD8549008A9850 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D828E86B13FD8549008A9850 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D828E86A13FD8549008A9850 /* PeteyPablo.plugin */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D828E86C13FD8549008A9850 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D828E86F13FD854A008A9850 /* Quartz.framework */,
+				D828E87113FD854A008A9850 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D828E87113FD854A008A9850 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D828E87213FD854A008A9850 /* AppKit.framework */,
+				D828E87313FD854A008A9850 /* CoreData.framework */,
+				D828E87413FD854A008A9850 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		D828E87713FD854A008A9850 /* PeteyPablo */ = {
+			isa = PBXGroup;
+			children = (
+				D828E87D13FD854A008A9850 /* PeteyPabloPlugin.h */,
+				D828E87E13FD854A008A9850 /* PeteyPabloPlugin.m */,
+				D828E87813FD854A008A9850 /* Supporting Files */,
+			);
+			path = PeteyPablo;
+			sourceTree = "<group>";
+		};
+		D828E87813FD854A008A9850 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D828E87913FD854A008A9850 /* PeteyPablo-Info.plist */,
+				D828E87A13FD854A008A9850 /* InfoPlist.strings */,
+				D828E88013FD854A008A9850 /* PeteyPablo-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D828E86913FD8549008A9850 /* PeteyPablo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D828E88313FD854A008A9850 /* Build configuration list for PBXNativeTarget "PeteyPablo" */;
+			buildPhases = (
+				D828E86513FD8549008A9850 /* Sources */,
+				D828E86613FD8549008A9850 /* Frameworks */,
+				D828E86713FD8549008A9850 /* Resources */,
+				D828E86813FD8549008A9850 /* Copy Plug-In Into Place */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PeteyPablo;
+			productName = PeteyPablo;
+			productReference = D828E86A13FD8549008A9850 /* PeteyPablo.plugin */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D828E86013FD8549008A9850 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "Chorded Constructions";
+			};
+			buildConfigurationList = D828E86313FD8549008A9850 /* Build configuration list for PBXProject "PeteyPablo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D828E85E13FD8549008A9850;
+			productRefGroup = D828E86B13FD8549008A9850 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D828E86913FD8549008A9850 /* PeteyPablo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D828E86713FD8549008A9850 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D828E87C13FD854A008A9850 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D828E86813FD8549008A9850 /* Copy Plug-In Into Place */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Plug-In Into Place";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# This shell script simply copies the built plug-in to \"~/Library/Graphics/Quartz Composer Plug-Ins\" and overrides any previous version at that location\n\nmkdir -p \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins\"\nrm -rf \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins/PeteyPablo.plugin\"\nditto \"$BUILT_PRODUCTS_DIR/PeteyPablo.plugin\" \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins/PeteyPablo.plugin\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D828E86513FD8549008A9850 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D828E87F13FD854A008A9850 /* PeteyPabloPlugin.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		D828E87A13FD854A008A9850 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D828E87B13FD854A008A9850 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D828E88113FD854A008A9850 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					DEBUG,
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SDKROOT = macosx;
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = Debug;
+		};
+		D828E88213FD854A008A9850 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SDKROOT = macosx;
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = Release;
+		};
+		D828E88413FD854A008A9850 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PeteyPablo/PeteyPablo-Prefix.pch";
+				INFOPLIST_FILE = "PeteyPablo/PeteyPablo-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Graphics/Quartz Composer Plug-Ins";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = plugin;
+			};
+			name = Debug;
+		};
+		D828E88513FD854A008A9850 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PeteyPablo/PeteyPablo-Prefix.pch";
+				INFOPLIST_FILE = "PeteyPablo/PeteyPablo-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Graphics/Quartz Composer Plug-Ins";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = plugin;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D828E86313FD8549008A9850 /* Build configuration list for PBXProject "PeteyPablo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D828E88113FD854A008A9850 /* Debug */,
+				D828E88213FD854A008A9850 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D828E88313FD854A008A9850 /* Build configuration list for PBXNativeTarget "PeteyPablo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D828E88413FD854A008A9850 /* Debug */,
+				D828E88513FD854A008A9850 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D828E86013FD8549008A9850 /* Project object */;
+}
