@@ -8,5 +8,23 @@
 
 #import <Quartz/Quartz.h>
 
-@interface PeteyPabloPlugIn : QCPlugIn
+@interface PeteyPabloPlugIn : QCPlugIn {
+//    SSWindow* _window;
+//    SSWebView* _webView;
+    CGImageRef _renderedImage;
+    id<QCPlugInOutputImageProvider> _placeHolderProvider;
+
+    NSURL* _fileLocation;
+    NSUInteger _destinationWidth;
+    NSUInteger _destinationHeight;
+    BOOL _doneSignal;
+    BOOL _doneSignalDidChange;
+}
+@property (nonatomic, assign) NSString* inputFileLocation;
+@property (nonatomic) NSUInteger inputPageNumber;
+@property (nonatomic) NSUInteger inputDestinationWidth;
+@property (nonatomic) NSUInteger inputDestinationHeight;
+@property (nonatomic) BOOL inputRenderSignal;
+@property (nonatomic, assign) id<QCPlugInOutputImageProvider> outputImage;
+@property (nonatomic) BOOL outputDoneSignal;
 @end

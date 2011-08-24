@@ -7,17 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D81B1D0514047074005D502B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D81B1D0314047074005D502B /* Localizable.strings */; };
+		D81B1D061404C7D1005D502B /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D828E87213FD854A008A9850 /* AppKit.framework */; };
 		D828E87013FD854A008A9850 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D828E86F13FD854A008A9850 /* Quartz.framework */; };
 		D828E87C13FD854A008A9850 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D828E87A13FD854A008A9850 /* InfoPlist.strings */; };
 		D828E87F13FD854A008A9850 /* PeteyPabloPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = D828E87E13FD854A008A9850 /* PeteyPabloPlugin.m */; };
-		D828E88613FD85F0008A9850 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D828E87413FD854A008A9850 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D81B1D0414047074005D502B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D828E86A13FD8549008A9850 /* PeteyPablo.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeteyPablo.plugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		D828E86F13FD854A008A9850 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		D828E87213FD854A008A9850 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
-		D828E87313FD854A008A9850 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		D828E87413FD854A008A9850 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D828E87913FD854A008A9850 /* PeteyPablo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PeteyPablo-Info.plist"; sourceTree = "<group>"; };
 		D828E87B13FD854A008A9850 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -32,7 +33,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D828E87013FD854A008A9850 /* Quartz.framework in Frameworks */,
-				D828E88613FD85F0008A9850 /* Foundation.framework in Frameworks */,
+				D81B1D061404C7D1005D502B /* AppKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,7 +70,6 @@
 			isa = PBXGroup;
 			children = (
 				D828E87213FD854A008A9850 /* AppKit.framework */,
-				D828E87313FD854A008A9850 /* CoreData.framework */,
 				D828E87413FD854A008A9850 /* Foundation.framework */,
 			);
 			name = "Other Frameworks";
@@ -89,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				D828E87913FD854A008A9850 /* PeteyPablo-Info.plist */,
+				D81B1D0314047074005D502B /* Localizable.strings */,
 				D828E87A13FD854A008A9850 /* InfoPlist.strings */,
 				D828E88013FD854A008A9850 /* PeteyPablo-Prefix.pch */,
 			);
@@ -148,6 +149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D828E87C13FD854A008A9850 /* InfoPlist.strings in Resources */,
+				D81B1D0514047074005D502B /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,6 +184,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		D81B1D0314047074005D502B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D81B1D0414047074005D502B /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		D828E87A13FD854A008A9850 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -289,6 +299,7 @@
 				D828E88513FD854A008A9850 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
