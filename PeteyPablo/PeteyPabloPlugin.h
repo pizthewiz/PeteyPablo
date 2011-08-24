@@ -8,13 +8,14 @@
 
 #import <Quartz/Quartz.h>
 
+@class SSWindow;
+
 @interface PeteyPabloPlugIn : QCPlugIn {
-//    SSWindow* _window;
-//    SSWebView* _webView;
+    SSWindow* _window;
+    PDFView* _pdfView;
     CGImageRef _renderedImage;
     id<QCPlugInOutputImageProvider> _placeHolderProvider;
 
-    NSURL* _fileLocation;
     NSUInteger _destinationWidth;
     NSUInteger _destinationHeight;
     BOOL _doneSignal;
