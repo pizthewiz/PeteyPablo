@@ -42,7 +42,7 @@
 
 #pragma mark - PLUGIN
 
-static NSString* const PPExampleCompositionName = @"";
+static NSString* const PPExampleCompositionName = @"Art Importation";
 static NSUInteger PPMainScreenWidth = 0;
 static NSUInteger PPMainScreenHeight = 0;
 
