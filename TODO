@@ -2,7 +2,7 @@
 NOW
 [X] properly setup view transform for scaling
 [X] test out window-less rendering
-[ ] create sample multi-page PDF and composite results in example comp
+[X] create sample multi-page PDF and composite results in example comp
 [ ] profile memory allocations to make sure it is kosher
 
 LATER
