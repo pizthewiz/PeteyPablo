@@ -189,10 +189,16 @@ static void _BufferReleaseCallback(const void* address, void* context) {
         _doneSignal = NO;
     }
 
-    BOOL shouldResize = [self didValueForInputKeyChange:@"inputDestinationWidth"] || [self didValueForInputKeyChange:@"inputDestinationHeight"];
     BOOL shouldLoadURL = [self didValueForInputKeyChange:@"inputFileLocation"] && ![self.inputFileLocation isEqualToString:@""];
-    BOOL shouldChangePage = shouldLoadURL || [self didValueForInputKeyChange:@"inputPageNumber"];
-    BOOL shouldRender = shouldResize || ([self didValueForInputKeyChange:@"inputRenderSignal"] && self.inputRenderSignal);
+    BOOL shouldChangePage = shouldLoadURL || (_document && [self didValueForInputKeyChange:@"inputPageNumber"]);
+    BOOL shouldResize = [self didValueForInputKeyChange:@"inputDestinationWidth"] || [self didValueForInputKeyChange:@"inputDestinationHeight"];
+    BOOL shouldRender = shouldLoadURL || ([self didValueForInputKeyChange:@"inputRenderSignal"] && self.inputRenderSignal);
+
+    if (!shouldLoadURL && !shouldChangePage && !shouldResize && !shouldRender) {
+        return YES;
+    }
+
+    CCDebugLogSelector();
 
     // resize when appropriate
     if (shouldResize) {
@@ -204,12 +210,6 @@ static void _BufferReleaseCallback(const void* address, void* context) {
         _destinationHeight = self.inputDestinationHeight;
         CCDebugLog(@"resize content to %lux%lu", (unsigned long)_destinationWidth, (unsigned long)_destinationHeight);
     }
-    // bail when new render is not necessary
-    if (!shouldLoadURL && !shouldRender) {
-        return YES;
-    }
-
-    CCDebugLogSelector();
 
     if (shouldLoadURL) {
         NSURL* url = [NSURL URLWithString:self.inputFileLocation];
@@ -228,8 +228,13 @@ static void _BufferReleaseCallback(const void* address, void* context) {
 
         CGPDFDocumentRelease(_document);
         _document = CGPDFDocumentCreateWithURL((__bridge CFURLRef)url);
+        if (!_document) {
+            CCErrorLog(@"ERROR - failed to create PDF from URL %@", url);
+            return NO;
+        }
     }
     if (shouldChangePage) {
+        CGPDFPageRelease(_page);
         _page = CGPDFDocumentGetPage(_document, self.inputPageNumber);
         if (!_page) {
             CCErrorLog(@"ERROR - unable to get page %lu", (unsigned long)self.inputPageNumber);
