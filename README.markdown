@@ -1,6 +1,6 @@
 
 # Petey Pablo
-a lightweight quartz composer patch to render a PDF document by page
+a lightweight quartz composer plug-in to render PDF document pages
 
 ### HOW TO INSTALL
 move PeteyPablo.plugin into ~/Library/Graphics/Quartz Composer Plug-Ins/
