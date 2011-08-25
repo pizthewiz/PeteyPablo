@@ -27,38 +27,19 @@
 #define CCLocalizedString(key, comment) [[NSBundle bundleForClass:[self class]] localizedStringForKey:(key) value:@"" table:(nil)]
 
 
-#pragma mark WINDOW
-
-@interface SSWindow : NSWindow
-@end
-@implementation SSWindow
-- (BOOL)isOpaque {
-    return NO;
-}
-- (NSColor*)backgroundColor {
-    return [NSColor clearColor];
-}
-@end
-
-#pragma mark - PLUGIN
-
 static NSString* const PPExampleCompositionName = @"Art Importation";
 static NSUInteger PPMainScreenWidth = 0;
 static NSUInteger PPMainScreenHeight = 0;
 
-/*
 static void _BufferReleaseCallback(const void* address, void* context) {
     CCDebugLog(@"_BufferReleaseCallback");
     // release bitmap context backing
     free((void*)address);
 }
-*/
 
 @interface PeteyPabloPlugIn()
 @property (nonatomic, strong) id <QCPlugInOutputImageProvider> placeHolderProvider;
-- (void)_setupWindow;
-- (void)_teardownWindow;
-- (void)_captureImageFromPDFView;
+- (void)_captureImageFromPDF;
 @end
 
 @implementation PeteyPabloPlugIn
@@ -140,23 +121,21 @@ static void _BufferReleaseCallback(const void* address, void* context) {
 }
 
 - (void)finalize {
-    [self _teardownWindow];
-    CGImageRelease(_renderedImage);
+    CGPDFDocumentRelease(_document);
+    CGPDFPageRelease(_page);
 
 	[super finalize];
 }
 
 - (void)dealloc {
-    [self _teardownWindow];
-    CGImageRelease(_renderedImage);
+    CGPDFDocumentRelease(_document);
+    CGPDFPageRelease(_page);
 }
 
 #pragma mark - EXECUTION
 
 - (BOOL)startExecution:(id <QCPlugInContext>)context {
     CCDebugLogSelector();
-
-    [self _setupWindow];
 
 	return YES;
 }
@@ -166,6 +145,48 @@ static void _BufferReleaseCallback(const void* address, void* context) {
 }
 
 - (BOOL)execute:(id <QCPlugInContext>)context atTime:(NSTimeInterval)time withArguments:(NSDictionary*)arguments {
+    // update outputs when appropriate
+    if (_doneSignalDidChange) {
+        // set image on done
+        if (_doneSignal) {
+            CGRect boxRect = CGPDFPageGetBoxRect(_page, kCGPDFCropBox);
+
+            // TODO - move this somewhere convenient
+            size_t renderedImageWidth = boxRect.size.width;
+            size_t bytesPerRow = renderedImageWidth * 4;
+            if (bytesPerRow % 16)
+                bytesPerRow = ((bytesPerRow / 16) + 1) * 16;
+
+            size_t renderedImageHeight = boxRect.size.height;
+            double totalBytes = renderedImageHeight * bytesPerRow;
+            void* baseAddress = valloc(totalBytes);
+            if (baseAddress == NULL) {
+                CCErrorLog(@"ERROR - failed to valloc %f bytes for bitmap data to write into", totalBytes);
+                return NO;
+            }
+
+//            CCDebugLog(@"update output image to %fx%f", (double)renderedImageWidth, (double)renderedImageHeight);
+
+            CGContextRef bitmapContext = CGBitmapContextCreate(baseAddress, renderedImageWidth, renderedImageHeight, 8, bytesPerRow, [context colorSpace], kCGImageAlphaPremultipliedFirst | kCGBitmapByteOrder32Host);
+            if (bitmapContext == NULL) {
+                CCErrorLog(@"ERROR - failed to create bitmap context");
+                free(baseAddress);
+                return NO;
+            }
+            CGRect bounds = CGRectMake(0., 0., renderedImageWidth, renderedImageHeight);
+            CGContextClearRect(bitmapContext, bounds);
+            CGContextDrawPDFPage(bitmapContext, _page);
+            CGContextRelease(bitmapContext);
+
+            self.placeHolderProvider = [context outputImageProviderFromBufferWithPixelFormat:QCPlugInPixelFormatBGRA8 pixelsWide:renderedImageWidth pixelsHigh:renderedImageHeight baseAddress:baseAddress bytesPerRow:bytesPerRow releaseCallback:_BufferReleaseCallback releaseContext:NULL colorSpace:[context colorSpace] shouldColorMatch:YES];
+            self.outputImage = self.placeHolderProvider;
+        }
+
+        self.outputDoneSignal = _doneSignal;
+        _doneSignalDidChange = _doneSignal;
+        _doneSignal = NO;
+    }
+
     BOOL shouldResize = [self didValueForInputKeyChange:@"inputDestinationWidth"] || [self didValueForInputKeyChange:@"inputDestinationHeight"];
     BOOL shouldLoadURL = [self didValueForInputKeyChange:@"inputFileLocation"] && ![self.inputFileLocation isEqualToString:@""];
     BOOL shouldChangePage = shouldLoadURL || [self didValueForInputKeyChange:@"inputPageNumber"];
@@ -180,7 +201,6 @@ static void _BufferReleaseCallback(const void* address, void* context) {
         _destinationWidth = self.inputDestinationWidth;
         _destinationHeight = self.inputDestinationHeight;
         CCDebugLog(@"resize content to %lux%lu", (unsigned long)_destinationWidth, (unsigned long)_destinationHeight);
-        [_window setContentSize:NSMakeSize(_destinationWidth, _destinationHeight)];
     }
     // bail when new render is not necessary
     if (!shouldLoadURL && !shouldRender) {
@@ -204,21 +224,19 @@ static void _BufferReleaseCallback(const void* address, void* context) {
             }
         }
 
-//        dispatch_async(dispatch_get_main_queue(), ^{
-            PDFDocument* doc = [[PDFDocument alloc] initWithURL:url];
-            if (!doc) {
-                CCErrorLog(@"ERROR - failed to create PDF document from URL");
-                return NO;
-            }
-            _pdfView.document = doc;
-//        });
+        CGPDFDocumentRelease(_document);
+        _document = CGPDFDocumentCreateWithURL((__bridge CFURLRef)url);
     }
     if (shouldChangePage) {
-        PDFDocument* doc = _pdfView.document;
-        [_pdfView goToPage:[doc pageAtIndex:self.inputPageNumber]];
+        _page = CGPDFDocumentGetPage(_document, self.inputPageNumber);
+        if (!_page) {
+            CCErrorLog(@"ERROR - unable to get page %lu", (unsigned long)self.inputPageNumber);
+            return NO;
+        }
+        CGPDFPageRetain(_page);
     }
     if (shouldRender) {
-        [self _captureImageFromPDFView];
+        [self _captureImageFromPDF];
     }
 
 	return YES;
@@ -234,50 +252,15 @@ static void _BufferReleaseCallback(const void* address, void* context) {
 
 #pragma mark - PRIVATE
 
-- (void)_setupWindow {
+- (void)_captureImageFromPDF {
     CCDebugLogSelector();
 
-    _window = [[SSWindow alloc] initWithContentRect:NSMakeRect(-16000., -16000., _destinationWidth, _destinationHeight) styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO];
-    _pdfView = [[PDFView alloc] initWithFrame:NSMakeRect(0., 0., _destinationWidth, _destinationHeight)];
-    _pdfView.displayMode = kPDFDisplaySinglePage;
-    _pdfView.autoScales = YES;
-    [_window setContentView:_pdfView];
-}
-
-- (void)_teardownWindow {
-    CCDebugLogSelector();
-
-    [_window setContentView:nil];
-    _pdfView = nil;
-
-    [_window close];
-    _window = nil;
-}
-
-- (void)_captureImageFromPDFView {
-    CCDebugLogSelector();
-
-//    dispatch_async(dispatch_get_main_queue(), ^{
-        // size to fit
-        NSSize pageSize = [_pdfView.currentPage boundsForBox:_pdfView.displayBox].size;
-        // NB - mostly just useful for the aspect ratio,
-        BOOL shouldResize = !NSEqualSizes([(NSView*)[_window contentView] bounds].size, pageSize);
-        if (shouldResize) {
-            [_window setContentSize:pageSize];
-        }
-
-        NSBitmapImageRep* bitmap = [_pdfView bitmapImageRepForCachingDisplayInRect:[_pdfView visibleRect]];
-        [_pdfView cacheDisplayInRect:[_pdfView visibleRect] toBitmapImageRep:bitmap];
-
-        NSString* path = [NSString stringWithFormat:@"/tmp/SS-%f.png", [[NSDate date] timeIntervalSince1970]];
-        [[bitmap representationUsingType:NSPNGFileType properties:nil] writeToFile:path atomically:YES];
-
-        CGImageRelease(_renderedImage);
-        _renderedImage = CGImageRetain([bitmap CGImage]);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // TODO - size to fit
 
         _doneSignal = YES;
         _doneSignalDidChange = YES;
-//    });
+    });
 }
 
 @end
