@@ -149,15 +149,16 @@ static void _BufferReleaseCallback(const void* address, void* context) {
     if (_doneSignalDidChange) {
         // set image on done
         if (_doneSignal) {
-            CGRect boxRect = CGPDFPageGetBoxRect(_page, kCGPDFCropBox);
-
             // TODO - move this somewhere convenient
-            size_t renderedImageWidth = boxRect.size.width;
+            CGRect boxRect = CGPDFPageGetBoxRect(_page, kCGPDFMediaBox);
+            CGFloat scale = fmin(_destinationWidth / boxRect.size.width, _destinationHeight / boxRect.size.height);
+
+            size_t renderedImageWidth = boxRect.size.width * scale;
             size_t bytesPerRow = renderedImageWidth * 4;
             if (bytesPerRow % 16)
                 bytesPerRow = ((bytesPerRow / 16) + 1) * 16;
 
-            size_t renderedImageHeight = boxRect.size.height;
+            size_t renderedImageHeight = boxRect.size.height * scale;
             double totalBytes = renderedImageHeight * bytesPerRow;
             void* baseAddress = valloc(totalBytes);
             if (baseAddress == NULL) {
@@ -175,6 +176,7 @@ static void _BufferReleaseCallback(const void* address, void* context) {
             }
             CGRect bounds = CGRectMake(0., 0., renderedImageWidth, renderedImageHeight);
             CGContextClearRect(bitmapContext, bounds);
+            CGContextScaleCTM(bitmapContext, scale, scale);
             CGContextDrawPDFPage(bitmapContext, _page);
             CGContextRelease(bitmapContext);
 
@@ -255,12 +257,12 @@ static void _BufferReleaseCallback(const void* address, void* context) {
 - (void)_captureImageFromPDF {
     CCDebugLogSelector();
 
-    dispatch_async(dispatch_get_main_queue(), ^{
-        // TODO - size to fit
+//    dispatch_async(dispatch_get_main_queue(), ^{
+        // NB - context transform occurs in -execute:atTime:withArguments:
 
         _doneSignal = YES;
         _doneSignalDidChange = YES;
-    });
+//    });
 }
 
 @end
