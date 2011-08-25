@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D80F67241406BDBE00289926 /* art.pdf in Resources */ = {isa = PBXBuildFile; fileRef = D80F67231406BDBE00289926 /* art.pdf */; };
 		D81B1D0514047074005D502B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D81B1D0314047074005D502B /* Localizable.strings */; };
 		D81B1D061404C7D1005D502B /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D828E87213FD854A008A9850 /* AppKit.framework */; };
 		D81B1D0E1405A4DB005D502B /* Art Importation.qtz in Resources */ = {isa = PBXBuildFile; fileRef = D81B1D0D1405A4DB005D502B /* Art Importation.qtz */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D80F67231406BDBE00289926 /* art.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = art.pdf; sourceTree = SOURCE_ROOT; };
 		D81B1D0414047074005D502B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D81B1D0A1405A4CD005D502B /* CHANGELOG */ = {isa = PBXFileReference; lastKnownFileType = text; path = CHANGELOG; sourceTree = SOURCE_ROOT; };
 		D81B1D0B1405A4CD005D502B /* README.markdown */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.markdown; sourceTree = SOURCE_ROOT; };
@@ -89,6 +91,7 @@
 				D81B1D0B1405A4CD005D502B /* README.markdown */,
 				D81B1D0A1405A4CD005D502B /* CHANGELOG */,
 				D81B1D0C1405A4CD005D502B /* TODO */,
+				D80F67231406BDBE00289926 /* art.pdf */,
 				D81B1D0D1405A4DB005D502B /* Art Importation.qtz */,
 			);
 			path = PeteyPablo;
@@ -160,6 +163,7 @@
 				D828E87C13FD854A008A9850 /* InfoPlist.strings in Resources */,
 				D81B1D0514047074005D502B /* Localizable.strings in Resources */,
 				D81B1D0E1405A4DB005D502B /* Art Importation.qtz in Resources */,
+				D80F67241406BDBE00289926 /* art.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
