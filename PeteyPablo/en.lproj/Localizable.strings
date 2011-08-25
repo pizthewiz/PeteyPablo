@@ -7,4 +7,4 @@
 */
 
 "kQCPlugIn_Name" = "PDF Importer";
-"kQCPlugIn_Description" = "";
+"kQCPlugIn_Description" = "This patch generates an image from a PDF at a given URL.\n\nThe Location input must be a fully qualified URL with scheme, or a file path relative to the composition. The Width and Height inputs are treated as maximum values in each respective dimension, while respecting the document's aspect ratio. The default background color is clear, so pages without an explicit background are rasterized onto full alpha.";
