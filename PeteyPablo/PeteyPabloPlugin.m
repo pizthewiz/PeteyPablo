@@ -192,8 +192,8 @@ static void _BufferReleaseCallback(const void* address, void* context) {
     BOOL shouldLoadURL = [self didValueForInputKeyChange:@"inputFileLocation"] && ![self.inputFileLocation isEqualToString:@""];
     BOOL shouldChangePage = shouldLoadURL || (_document && [self didValueForInputKeyChange:@"inputPageNumber"]);
     BOOL shouldResize = [self didValueForInputKeyChange:@"inputDestinationWidth"] || [self didValueForInputKeyChange:@"inputDestinationHeight"];
-    BOOL shouldRender = shouldLoadURL || ([self didValueForInputKeyChange:@"inputRenderSignal"] && self.inputRenderSignal);
-
+    BOOL shouldRender = shouldLoadURL || shouldChangePage || shouldResize || ([self didValueForInputKeyChange:@"inputRenderSignal"] && self.inputRenderSignal);
+    // bail when possible
     if (!shouldLoadURL && !shouldChangePage && !shouldResize && !shouldRender) {
         return YES;
     }
@@ -233,6 +233,7 @@ static void _BufferReleaseCallback(const void* address, void* context) {
             return NO;
         }
     }
+
     if (shouldChangePage) {
         CGPDFPageRelease(_page);
         _page = CGPDFDocumentGetPage(_document, self.inputPageNumber);
@@ -242,6 +243,7 @@ static void _BufferReleaseCallback(const void* address, void* context) {
         }
         CGPDFPageRetain(_page);
     }
+
     if (shouldRender) {
         [self _captureImageFromPDF];
     }
