@@ -18,6 +18,7 @@
 
 /* Begin PBXFileReference section */
 		D80F67231406BDBE00289926 /* art.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = art.pdf; sourceTree = SOURCE_ROOT; };
+		D80F67261406C91300289926 /* Rakefile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Rakefile; sourceTree = SOURCE_ROOT; };
 		D81B1D0414047074005D502B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D81B1D0A1405A4CD005D502B /* CHANGELOG */ = {isa = PBXFileReference; lastKnownFileType = text; path = CHANGELOG; sourceTree = SOURCE_ROOT; };
 		D81B1D0B1405A4CD005D502B /* README.markdown */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.markdown; sourceTree = SOURCE_ROOT; };
@@ -91,6 +92,7 @@
 				D81B1D0B1405A4CD005D502B /* README.markdown */,
 				D81B1D0A1405A4CD005D502B /* CHANGELOG */,
 				D81B1D0C1405A4CD005D502B /* TODO */,
+				D80F67261406C91300289926 /* Rakefile */,
 				D80F67231406BDBE00289926 /* art.pdf */,
 				D81B1D0D1405A4DB005D502B /* Art Importation.qtz */,
 			);
@@ -118,6 +120,7 @@
 				D828E86513FD8549008A9850 /* Sources */,
 				D828E86613FD8549008A9850 /* Frameworks */,
 				D828E86713FD8549008A9850 /* Resources */,
+				D80F67271406C94200289926 /* Update Info.plist With git Info */,
 				D828E86813FD8549008A9850 /* Copy Plug-In Into Place */,
 			);
 			buildRules = (
@@ -170,6 +173,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		D80F67271406C94200289926 /* Update Info.plist With git Info */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update Info.plist With git Info";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/macrake update_bundle_version\n";
+		};
 		D828E86813FD8549008A9850 /* Copy Plug-In Into Place */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
