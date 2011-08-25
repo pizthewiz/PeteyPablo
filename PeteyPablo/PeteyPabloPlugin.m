@@ -38,7 +38,7 @@ static void _BufferReleaseCallback(const void* address, void* context) {
 }
 
 @interface PeteyPabloPlugIn()
-@property (nonatomic, strong) id <QCPlugInOutputImageProvider> placeHolderProvider;
+@property (nonatomic, retain) id <QCPlugInOutputImageProvider> placeHolderProvider;
 @end
 
 @implementation PeteyPabloPlugIn
@@ -123,12 +123,18 @@ static void _BufferReleaseCallback(const void* address, void* context) {
     CGPDFDocumentRelease(_document);
     CGPDFPageRelease(_page);
 
+    self.placeHolderProvider = nil;
+
 	[super finalize];
 }
 
 - (void)dealloc {
     CGPDFDocumentRelease(_document);
     CGPDFPageRelease(_page);
+
+    self.placeHolderProvider = nil;
+
+    [super dealloc];
 }
 
 #pragma mark - EXECUTION
