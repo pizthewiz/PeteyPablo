@@ -39,7 +39,6 @@ static void _BufferReleaseCallback(const void* address, void* context) {
 
 @interface PeteyPabloPlugIn()
 @property (nonatomic, strong) id <QCPlugInOutputImageProvider> placeHolderProvider;
-- (void)_captureImageFromPDF;
 @end
 
 @implementation PeteyPabloPlugIn
@@ -245,7 +244,9 @@ static void _BufferReleaseCallback(const void* address, void* context) {
     }
 
     if (shouldRender) {
-        [self _captureImageFromPDF];
+        // kickstart image rendering
+        _doneSignal = YES;
+        _doneSignalDidChange = YES;
     }
 
 	return YES;
@@ -257,19 +258,6 @@ static void _BufferReleaseCallback(const void* address, void* context) {
 
 - (void)stopExecution:(id <QCPlugInContext>)context {
     CCDebugLogSelector();
-}
-
-#pragma mark - PRIVATE
-
-- (void)_captureImageFromPDF {
-    CCDebugLogSelector();
-
-//    dispatch_async(dispatch_get_main_queue(), ^{
-        // NB - context transform occurs in -execute:atTime:withArguments:
-
-        _doneSignal = YES;
-        _doneSignalDidChange = YES;
-//    });
 }
 
 @end
